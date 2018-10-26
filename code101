@@ -1,0 +1,78 @@
+import datetime
+
+print ("""***Welcome to the Pregnancy app, the only app that gives
+you all the details on how to have a successful pregnancy
+in Zimbabwe***""")
+
+def name():
+    name = input('Please enter your name: ')
+    print ('Congratulations {}. Your journey to a successful pregnancy\
+     begins here'.format(name.title()))
+
+def first_trimester():     #tests for first 3 months of pregnancy
+    test_list= ['Ultrasound Scan(0)','Full blood Count(1)','Random Blood Sugar(2)',\
+    'Rhesus Antibody(3)', 'HIV Test(4)', 'Syphilis Screen(5)', 'TORCH Screen(6)']
+    print (test_list)
+    tests_done = []
+    while True:
+        test = eval(input('Which of tests listed above have you done? Q to Quit '))
+        if test > len(test_list):
+            break
+        else:
+            tests_done.append(test_list[test])
+    print ("tests done so far: {}".format(tests_done))
+    print ('remaining tests: {}'.format(set(test_list)-set(tests_done)))
+
+def second_trimester():  #tests for second 3 months of pregnancy
+    print (['Ultrasound Scan'])
+
+def third_trimester():   #tests for the last 3 months of pregnancy
+    print (['Ultrasound Scan','HIV test','Full Blood Count'])
+
+name()
+
+now = datetime.datetime.now()
+print ('Today is {}'.format(now.strftime('%d-%m-%Y')))
+
+option = eval(input ('Please Enter 1 for Routine Care or 2 for Kick Chart: '))
+
+if option==1:
+    lnmp = input('please enter date of last menstrual period as DD/MM/YYYY: ')
+    lnmp =datetime.datetime.strptime(lnmp, '%d/%m/%Y')
+
+    current_ga = now - lnmp
+
+    if current_ga< datetime.timedelta(days=294) and now > lnmp :
+        edd = lnmp + datetime.timedelta(days = 280)
+        print ('Your Last Normal Menstrual Period was on {} and your Estimated\
+        Date of delivery is {}'.format(lnmp.date(),edd.date()))
+        print ('Your Estimated Gestational Age is {} weeks'.format(round(current_ga.days/7)))
+
+        if current_ga<datetime.timedelta(days = 91):
+            first_trimester()
+else:
+        print ('Mmmmm, are you sure of your dates?\
+        Please visit you local health\
+        facility for further assistance')   #or press R to restart??
+
+if option == 2:
+    print ('Welcome to the Kick Chart Counter. This will help you keep track\
+    of the wellbeing of your baby. Fetal Kicks are usually felt after the 16th week\
+    so if you are not yet 16 weeks blah blah blah... ')
+
+    sixteen_weeks = input('Please confirm you have felt kick today? Y/N ')
+    count = 0
+    while sixteen_weeks == 'y'.lower():
+        kicks = input ('press x for every kick you feel and q to quit: ')
+        if kicks == 'x'.lower():
+            count = count + 1
+        elif kicks == 'q'.lower():
+            break
+
+    print ('Number of Kicks recorded today: {}'.format(count))    
+    
+    
+    
+    
+    
+    
