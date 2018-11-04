@@ -50,6 +50,10 @@ if option==1:
 
         if current_ga<datetime.timedelta(days = 91):
             first_trimester()
+        if datetime.timedelta(days = 91) < current_ga < datetime.timedelta (days = 182):
+            second_trimester()
+        if current_ga > datetime.timedelta (days = 182):
+            third_trimester ()
 else:
         print ('Mmmmm, are you sure of your dates?\
         Please visit you local health\
