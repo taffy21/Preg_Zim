@@ -39,6 +39,10 @@ page_three = False
 page_three_button = pygwidgets.TextButton(window, (150, 300), "Next")
 back_button = pygwidgets.TextButton(window, (150, 400), "Back" )
 
+
+routine = pygwidgets.TextButton(window, (50, 500), "Routine Care")
+chart = pygwidgets.TextButton(window, (200, 500), "Kick Chart")
+
 # LOOPS
 while True:
     for event in pygame.event.get():
@@ -49,13 +53,19 @@ while True:
             page_two = True
         if input_box.handleEvent(event):
             input_text = input_box.getValue()
-            #name_text = pygwidgets.DisplayText(window, (0, 100), input_text, textColor=WHITE)
+            congrats_msg = f'''Congratulations {input_text}. Your journey 
+            to a successful pregnancy begins here'''
+            name_text = pygwidgets.DisplayText(window, (0, 100), congrats_msg, textColor=WHITE, fontSize=25)
         if page_three_button.handleEvent(event):
             page_two = False
             page_three = True
         if back_button.handleEvent(event):
             page_two = False
             page_three = False
+        if routine.handleEvent(event):
+            pass
+        if chart.handleEvent(event):
+            pass
         
     if page_two:
         window.fill(BLACK)
@@ -67,8 +77,11 @@ while True:
         clock.tick(FRAMES_PS)
 
     elif page_three:
-        window.fill(BLACK)
-        #name_text.draw()
+        window.fill(BLACK)        
+        name_text.draw()
+        pygwidgets.DisplayText(window, (0, 300), "What would you like to do?", textColor=WHITE, fontSize=25).draw()
+        routine.draw()
+        chart.draw()
         pygame.display.update()
         clock.tick(FRAMES_PS)
     else:
